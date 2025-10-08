@@ -30,7 +30,8 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://your-production-domain.com", // Add your production domain
+    "https://dresscode-backend.vercel.app", // Vercel deployment domain
+    "https://your-frontend-domain.vercel.app", // Add your frontend domain when you deploy it
   ];
 
   const origin = req.headers.origin;
@@ -63,6 +64,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(logReqRes("log.txt"));
+
+// Root route
+app.get("/", (req, res) => {
+  res.json({
+    message: "DressCode Backend API is running!",
+    status: "success",
+    endpoints: {
+      cloths: "/api/cloths",
+      user: "/api/user",
+      contact: "/api/contact",
+      cart: "/api/cart",
+      orders: "/api/orders",
+    },
+  });
+});
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({
+    status: "healthy",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  });
+});
 
 app.use("/api/cloths", clothsRouter);
 app.use("/api/user", userRouter);
