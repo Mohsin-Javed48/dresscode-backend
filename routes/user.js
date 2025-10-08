@@ -41,11 +41,13 @@ router.post("/google/callback", handleGoogleCallback);
 // User CRUD routes
 router.get("/email/:email", getUserByEmail);
 router.post("/", createUser);
+
+// Admin routes (must come before /:id route)
+router.get("/", verifyToken, getAllUsers);
+
+// Dynamic routes (must come last)
 router.get("/:id", getUserById);
 router.put("/:id", verifyToken, updateUserProfile);
 router.delete("/:id", verifyToken, deleteUser);
-
-// Admin routes
-router.get("/", verifyToken, getAllUsers);
 
 module.exports = router;

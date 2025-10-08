@@ -30,8 +30,8 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://dresscode-backend.vercel.app", // Vercel deployment domain
-    "https://your-frontend-domain.vercel.app", // Add your frontend domain when you deploy it
+    "https://dresscode-backend-git-master-mohsin-javed48s-projects.vercel.app/", // Vercel deployment domain
+    "", // Add your frontend domain when you deploy it
   ];
 
   const origin = req.headers.origin;
